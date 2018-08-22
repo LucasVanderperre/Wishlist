@@ -24,17 +24,23 @@ namespace windowsWishlistAppGroepVM9.Models
         [JsonProperty("items")]
         public ICollection<Item> Items { get; set; }
         [JsonProperty("volgers")]
-        public HashSet<string> Volgers { get; }
+        public ICollection<string> Volgers { get; set; }
         [JsonProperty("aanvragen")]
-        public HashSet<string> Aanvragen { get; }
+        public ICollection<string> Aanvragen { get; set; }
 
         public Wishlist()
         {
+            Items = new List<Item>();
+            Volgers = new List<string>();
+            Aanvragen = new List<string>();
 
         }
 
         public Wishlist(String naam, DateTime datum)
         {
+            Items = new List<Item>();
+            Volgers = new List<string>();
+            Aanvragen = new List<string>();
             Naam = naam;
             Datum = datum;
         }

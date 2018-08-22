@@ -15,7 +15,17 @@ namespace windowsWishlistAppGroepVM9.Models
         public string name
         {
             get { return Convert.ToString(Id); }
-            set { Id = MongoDB.Bson.ObjectId.Parse(value); }
+            set
+            {
+                if (value == null)
+                {
+                    Id = new ObjectId();
+                }
+                else
+                {
+                    Id = MongoDB.Bson.ObjectId.Parse(value);
+                }
+            }
         }
         [BsonElement("Username")]
         public String Username { get; set; }

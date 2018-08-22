@@ -16,13 +16,13 @@ public class Gebruiker
         public string voornaam { get; set; }
         public string familienaam { get; set; }
         public ICollection<string> EigenWishlists { get; set; }
-        public ICollection<string> VolgendeWishlists { get; set; }
+        public ICollection<string> AndereWishlists { get; set; }
         public ICollection<string> Uitnodigingen { get; set; }
         public string wachtwoord { get; set; }
 
         public Gebruiker() {
             EigenWishlists = new List<string>();
-            VolgendeWishlists = new List<string>();
+            AndereWishlists = new List<string>();
             Uitnodigingen = new List<string>();
 
         }
@@ -32,7 +32,7 @@ public class Gebruiker
             this.username = username;
             this.wachtwoord = wachtwoord;
             EigenWishlists = new List<string>();
-            VolgendeWishlists = new List<string>();
+            AndereWishlists = new List<string>();
             Uitnodigingen = new List<string>();
         }
         public Gebruiker(string username, string wachtwoord, string voornaam, string familienaam)
@@ -42,22 +42,22 @@ public class Gebruiker
             this.voornaam = voornaam;
             this.familienaam = familienaam;
             EigenWishlists = new List<string>();
-            VolgendeWishlists = new List<string>();
+            AndereWishlists = new List<string>();
             Uitnodigingen = new List<string>();
         }
 
-		public void addEigenWishlist(Wishlist wishlist)
+		public void addEigenWishlist(string wishlist)
 		{
-			EigenWishlists.Add(wishlist.name);
+			EigenWishlists.Add(wishlist);
 		}
-		public void addVolgendeWishlist(Wishlist wishlist)
+		public void addVolgendeWishlist(string wishlist)
 		{
-			VolgendeWishlists.Add(wishlist.name);
+            AndereWishlists.Add(wishlist);
 		}
 
-		public void addUitnodiging(Wishlist wishlist)
+		public void addUitnodiging(string wishlist)
 		{
-			Uitnodigingen.Add(wishlist.name);
+			Uitnodigingen.Add(wishlist);
 		}
 	}
 }

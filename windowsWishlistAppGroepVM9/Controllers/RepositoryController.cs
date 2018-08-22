@@ -15,13 +15,15 @@ namespace windowsWishlistAppGroepVM9.Controllers
     {
         private readonly string baseUrl = "http://localhost:57703/api";
         public LoginViewModel gebruikerViewModel { get; set; }
-        public bool results = true;
+        public HomescreenViewModel homescreenLists { get; set; }
+        public bool results = false;
         public RepositoryController()
         {
+            gebruikerViewModel = new LoginViewModel();
+            homescreenLists = new HomescreenViewModel();
         }
         public async Task Login(Gebruiker gbr)
         {
-            gebruikerViewModel = new LoginViewModel();
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri(baseUrl+ "/login/"+gbr.username+"/"+gbr.wachtwoord));
             Gebruiker gebruiker = JsonConvert.DeserializeObject<Gebruiker>(json);
@@ -40,7 +42,6 @@ namespace windowsWishlistAppGroepVM9.Controllers
 
         public async Task Registreer(Gebruiker gbr)
         {
-            gebruikerViewModel = new LoginViewModel();
             HttpClient client = new HttpClient();
             var myContent = JsonConvert.SerializeObject(gbr);
             var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
@@ -51,6 +52,7 @@ namespace windowsWishlistAppGroepVM9.Controllers
             if (gebruiker != null)
             {
                 gebruikerViewModel.Gebruiker = gebruiker;
+
                 Console.Write("gebruiker geregistreerd");
 
             }
@@ -72,7 +74,7 @@ namespace windowsWishlistAppGroepVM9.Controllers
             Wishlist wl = JsonConvert.DeserializeObject<Wishlist>(responseBody);
             if (result != null)
             {
-                gebruikerViewModel.Gebruiker.addEigenWishlist(wl);
+                gebruikerViewModel.Gebruiker.addEigenWishlist(wl.name);
                 Console.Write("wishlist toegevoegd");
 
             }
@@ -88,14 +90,12 @@ namespace windowsWishlistAppGroepVM9.Controllers
             var myContent = JsonConvert.SerializeObject(wishlist);
             var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
             var result = await client.PutAsync((baseUrl + "/wishlist/"+wishlist.name ), stringContent);
-            result.EnsureSuccessStatusCode();
-            string responseBody = await result.Content.ReadAsStringAsync();
-            Wishlist wl = JsonConvert.DeserializeObject<Wishlist>(responseBody);
+            result.EnsureSuccessStatusCode();;
             if (result != null)
             {
-                string remove = gebruikerViewModel.Gebruiker.EigenWishlists.Where(item => item.Equals(wishlist.name)).First();
-                gebruikerViewModel.Gebruiker.EigenWishlists.Remove(remove);
-                gebruikerViewModel.Gebruiker.addEigenWishlist(wl);
+                //  string remove = gebruikerViewModel.Gebruiker.EigenWishlists.Where(item => item.Equals(wishlist.name)).First();
+                // gebruikerViewModel.Gebruiker.EigenWishlists.Remove(remove);
+                // gebruikerViewModel.Gebruiker.EigenWishlists.Add(wl);
                 Console.Write("Item toegevoegd");
 
             }
@@ -105,24 +105,110 @@ namespace windowsWishlistAppGroepVM9.Controllers
             }
         }
 
-        public async Task CheckUsername(string usrname)
+        public async Task CheckUsername(string usrname, string wishlist)
         {
+            results = false;
             HttpClient client = new HttpClient();
             var myContent = JsonConvert.SerializeObject(usrname);
             var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
             var result = await client.GetStringAsync(baseUrl + "/gebruiker/" + usrname);
             Gebruiker wl = JsonConvert.DeserializeObject<Gebruiker>(result);
-            if (result != null)
+            if (wl != null)
             {
                 Console.Write("User bestaat");
                 results = true;
+                wl.addUitnodiging(wishlist);
+                myContent = JsonConvert.SerializeObject(wl);
+                stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+                var rst = await client.PutAsync(baseUrl + "/gebruiker/" + wl.name, stringContent);
+                rst.EnsureSuccessStatusCode();
+                string responseBody = await rst.Content.ReadAsStringAsync();
             }
             else
             {
                 Console.Write("User bestaat niet");
                 results = false;
             }
+           
+            
+        }
+        public async Task getWishlists()
+        {
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(gebruikerViewModel.Gebruiker.EigenWishlists);
+            var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var result = await client.PutAsync(baseUrl+"/wishlist", stringContent);
+            result.EnsureSuccessStatusCode();
+            string responseBody = await result.Content.ReadAsStringAsync();
+            List<Wishlist> wl = JsonConvert.DeserializeObject<List<Wishlist>>(responseBody);
+            if (wl != null)
+            {
+                homescreenLists.eigenWishlists = wl;
+                Console.Write("Wishlist opgelhaald");
+            }
+            else
+            {
+                Console.Write("Wishlist niet opgelhaald");
+            }
+
+             myContent = JsonConvert.SerializeObject(gebruikerViewModel.Gebruiker.AndereWishlists);
+             stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+             result = await client.PutAsync(baseUrl + "/wishlist", stringContent);
+            result.EnsureSuccessStatusCode();
+             responseBody = await result.Content.ReadAsStringAsync();
+            List<Wishlist> wl1 = JsonConvert.DeserializeObject<List<Wishlist>>(responseBody);
+            if (wl1 != null)
+            {
+                homescreenLists.volgendeWishlists = wl1;
+                Console.Write("Wishlist opgelhaald");
+            }
+            else
+            {
+                Console.Write("Wishlist niet opgelhaald");
+            }
+             myContent = JsonConvert.SerializeObject(gebruikerViewModel.Gebruiker.Uitnodigingen);
+             stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+             result = await client.PutAsync(baseUrl + "/wishlist", stringContent);
+            result.EnsureSuccessStatusCode();
+             responseBody = await result.Content.ReadAsStringAsync();
+            List<Wishlist> wl2 = JsonConvert.DeserializeObject<List<Wishlist>>(responseBody);
+            if (wl2 != null)
+            {
+                homescreenLists.aangevraagdeWishlists = wl2;
+                Console.Write("Wishlist opgelhaald");
+            }
+            else
+            {
+                Console.Write("Wishlist niet opgelhaald");
+            }
+        }
+        
+        public async Task weigerUitnodiging(Wishlist wishlist)
+        {
+            gebruikerViewModel.Gebruiker.Uitnodigingen.Remove(wishlist.name);
+            wishlist.Volgers.Remove(gebruikerViewModel.Gebruiker.username);
+            await UpdateWishlist(wishlist);
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(gebruikerViewModel.Gebruiker);
+            var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var rst = await client.PutAsync(baseUrl + "/gebruiker/" + gebruikerViewModel.Gebruiker.name, stringContent);
+            rst.EnsureSuccessStatusCode();
+
+
         }
 
+        public async Task accepteerUitnodiging(Wishlist wishlist)
+        {
+            gebruikerViewModel.Gebruiker.addVolgendeWishlist(wishlist.name);
+            gebruikerViewModel.Gebruiker.Uitnodigingen.Remove(wishlist.name);
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(gebruikerViewModel.Gebruiker);
+            var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var rst = await client.PutAsync(baseUrl + "/gebruiker/" + gebruikerViewModel.Gebruiker.name, stringContent);
+            rst.EnsureSuccessStatusCode();
+
+
+        }
+        
     }
 }

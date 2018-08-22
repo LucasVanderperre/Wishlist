@@ -35,7 +35,31 @@ namespace WishlistAppBackend.Controllers
             {
                 return NotFound();
             }
+            if(Wishlist.Items == null)
+            {
+                Wishlist.Items = new List<Item>();
+            }
             return new ObjectResult(Wishlist);
+        }
+
+        [HttpPut]
+        public IEnumerable<Wishlist> Put([FromBody]List<string> p)
+        {
+            List<Wishlist> result = new List<Wishlist>();
+            foreach(string id in p){
+                var Wishlist = objds.GetWishlist(new ObjectId(id));
+                if (Wishlist == null)
+                {
+                    throw new Exception("list not found");
+                }
+                if(Wishlist.Items == null)
+                {
+                    Wishlist.Items = new List<Item>();
+                }
+
+                result.Add(Wishlist);
+            }
+            return result;
         }
 
         [HttpPost("{id:length(24)}")]

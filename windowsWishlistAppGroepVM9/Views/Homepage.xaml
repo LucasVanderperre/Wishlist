@@ -27,7 +27,17 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Margin="10">Eigen wishlists</TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="0" Margin="10">wishlists die je volgt</TextBlock>
             <TextBlock Grid.Column="2" Grid.Row="0" Margin="10">Aanvragen</TextBlock>
-            <ListView x:Name="wishlists" Grid.Column="0" Grid.Row="1" Margin="10">
+            <ListView x:Name="eigen" Grid.Column="0" Grid.Row="1" Margin="10" IsItemClickEnabled="True" ItemClick="ListItem_Clicked">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                            <TextBlock Text="{Binding Naam}"/>
+                            <TextBlock Text="{Binding Datum}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="volgen" Grid.Column="1" Margin="10" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -37,17 +47,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="wishlists1" Grid.Column="1" Margin="10" Grid.Row="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Naam}"/>
-                            <TextBlock Text="{Binding Datum}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="wishlists2" Grid.Column="2" Margin="10" Grid.Row="1">
+            <ListView x:Name="aanvragen" Grid.Column="2" Margin="10" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -55,10 +55,10 @@
                                     <TextBlock Text="{Binding Naam}"/>
                                     <TextBlock Text="{Binding Datum}"/>
                                 </StackPanel>
-                            <Button Margin="5">
+                            <Button Click="Button_accept" Margin="5">
                                 <Image Source="../Assets/check.png" Width="20" Height="20"/>
                             </Button>
-                            <Button Margin="5">
+                            <Button Click="Button_weiger" Margin="5">
                                 <Image Source="../Assets/cancel.png" Width="20" Height="20"/>
                             </Button>
                             </StackPanel>

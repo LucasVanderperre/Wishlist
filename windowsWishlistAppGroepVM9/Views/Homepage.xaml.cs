@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using windowsWishlistAppGroepVM9.Models;
+using windowsWishlistAppGroepVM9.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,7 +28,10 @@ namespace windowsWishlistAppGroepVM9
     public sealed partial class Homepage : Page
     {
         private App app;
-
+        ObservableCollection<Wishlist> eigenlist = new ObservableCollection<Wishlist>();
+        ObservableCollection<Wishlist> volgenlist = new ObservableCollection<Wishlist>();
+        ObservableCollection<Wishlist> aanvragenlist = new ObservableCollection<Wishlist>();
+        Homepage content;
         public Homepage()
         {
             this.InitializeComponent();
@@ -39,18 +43,74 @@ namespace windowsWishlistAppGroepVM9
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:57703/api/wishlist"));
-            var lst = JsonConvert.DeserializeObject<List<Wishlist>>(json);
-            wishlists.ItemsSource = app.repository.gebruikerViewModel.Gebruiker.EigenWishlists;
-            wishlists2.ItemsSource = lst;
-            wishlists1.ItemsSource = lst;
+            ophalen();
+        }
+        private async void ophalen()
+        {
+            await app.repository.getWishlists();
+            foreach (Wishlist wl in app.repository.homescreenLists.eigenWishlists)
+            {
+                eigenlist.Add(wl);
+            }
+            foreach (Wishlist wl in app.repository.homescreenLists.volgendeWishlists)
+            {
+                volgenlist.Add(wl);
+            }
+            foreach (Wishlist wl in app.repository.homescreenLists.aangevraagdeWishlists)
+            {
+                aanvragenlist.Add(wl);
+            }
+            eigen.ItemsSource = eigenlist;
+            volgen.ItemsSource = volgenlist;
+            aanvragen.ItemsSource = aanvragenlist;
+        }
+        private void ListItem_Clicked(object sender, ItemClickEventArgs e)
+        {
+            
+            WishlistViewModel vm = new WishlistViewModel();
+            vm.wishlist = (Wishlist)e.ClickedItem;
+            content = this;
+           var view = new Wishlists(vm);
+           this.Content = view;
+          //  this.Frame.Navigate(typeof(Wishlists), vm);
+
         }
 
         private void AddWishlistbtn_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddWishlist));
+            //this.Frame.Navigate(typeof(AddWishlist));
+            this.Content = new AddWishlist();
+        }
+
+        private async void Button_weiger(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Wishlist wishlist = (Wishlist) btn.DataContext;
+          //  Wishlist wishlist = (Wishlist)e.ClickedItem;
+           await app.repository.weigerUitnodiging(wishlist);
+            aanvragenlist.Remove(wishlist);
+
+           
+        }
+        private async void Button_accept(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Wishlist wishlist = (Wishlist)btn.DataContext;
+            //    Wishlist wishlist = (Wishlist)e.ClickedItem;
+            //   await app.repository.weigerUitnodiging(wishlist);
+            //  aanvragenlist.Remove(wishlist);
+            await app.repository.accepteerUitnodiging(wishlist);
+            aanvragenlist.Remove(wishlist);
+            volgenlist.Add(wishlist);
+
+
+        }
+
+        public void SluitWishlist()
+        {
+            Homepage hp = new Homepage();
+            hp.ophalen();
+            this.Content = hp;
         }
     }
 }

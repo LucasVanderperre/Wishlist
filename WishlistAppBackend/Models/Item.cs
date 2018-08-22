@@ -12,11 +12,11 @@ namespace windowsWishlistAppGroepVM9.Models
 	{
     public ObjectId Id { get; set; }
 	  [BsonElement("Titel")]
-    public String Titel { get; set; }
+    public string Titel { get; set; }
 	  [BsonElement("Beschrijving")]
-    public String Beschrijving { get; set; }
+    public string Beschrijving { get; set; }
 	  [BsonElement("FotoUrl")]
-    public String FotoUrl { get; set; }
+    public string FotoUrl { get; set; }
 	  [BsonElement("Gebruiker")]
     public Gebruiker Gebruiker { get; set; }
     public CategorieEnum Categorie { get; set; }

@@ -28,12 +28,19 @@ namespace windowsWishlistAppGroepVM9
         {
             this.InitializeComponent();
             app = (App)Application.Current;
+            message.Visibility = Visibility.Collapsed;
         }
 
         private async void Loginbtn_OnClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
             await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Text));
             this.Frame.Navigate(typeof(Homepage));
+            }catch(Exception ex)
+            {
+                message.Visibility = Visibility.Visible;
+            }
 
         }
 

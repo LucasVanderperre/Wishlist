@@ -92,6 +92,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\HomescreenViewModel.cs" />
     <Compile Include="ViewModels\WishlistViewModel.cs" />
     <Compile Include="Views\AddWishlist.xaml.cs">
       <DependentUpon>AddWishlist.xaml</DependentUpon>

@@ -12,11 +12,22 @@ namespace windowsWishlistAppGroepVM9.Models
     public class Wishlist
     {
         //public String Id { get; set; }
+        [BsonElement("_id")]
         public ObjectId Id { get; set; }
         public string name
         {
             get { return Convert.ToString(Id); }
-            set { Id = MongoDB.Bson.ObjectId.Parse(value); }
+            set
+            {
+                if (value == null)
+                {
+                    Id = new ObjectId();
+                }
+                else
+                {
+                    Id = MongoDB.Bson.ObjectId.Parse(value);
+                }
+            }
         }
         [BsonElement("Naam")]
         public String Naam { get; set; }
@@ -25,9 +36,9 @@ namespace windowsWishlistAppGroepVM9.Models
         [BsonElement("Items")]
         public ICollection<Item> Items { get; set; }
         [BsonElement("Volgers")]
-        public HashSet<string> Volgers { get; }
+        public HashSet<string> Volgers { get; set; }
         [BsonElement("Aanvragen")]
-        public HashSet<string> Aanvragen { get; }
+        public HashSet<string> Aanvragen { get; set; }
 
         public Wishlist(String naam, DateTime datum)
         {

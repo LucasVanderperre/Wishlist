@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +27,9 @@ namespace windowsWishlistAppGroepVM9
     {
         private WishlistViewModel wishlist;
         private App app;
+        ObservableCollection<Item> itms = new ObservableCollection<Item>();
+        ObservableCollection<string> vlgrs = new ObservableCollection<string>();
+
         public Wishlists(WishlistViewModel wl)
         {
             this.InitializeComponent();
@@ -33,6 +37,18 @@ namespace windowsWishlistAppGroepVM9
             app = (App)Application.Current;
             messageItem.Visibility = Visibility.Collapsed;
             message.Visibility = Visibility.Collapsed;
+
+            foreach (Item item in wishlist.wishlist.Items)
+            {
+                itms.Add(item);
+            }
+            items.ItemsSource = itms;
+            foreach (string aanvr in wishlist.wishlist.Volgers)
+            {
+                vlgrs.Add(aanvr);
+            }
+            volgers.ItemsSource = vlgrs;
+            titelView.Text = "Wishlist:  " + wl.wishlist.Naam;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -41,7 +57,7 @@ namespace windowsWishlistAppGroepVM9
             //HttpClient client = new HttpClient();
             //var json = await client.GetStringAsync(new Uri("http://localhost:14547/api/movies"));
             //var lst = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(json);
-            items.ItemsSource = wishlist.wishlist.Items;
+
         }
 
         private async void Button_item(object sender, RoutedEventArgs e)
@@ -54,12 +70,12 @@ namespace windowsWishlistAppGroepVM9
             else
             {
                 CategorieEnum cat = CategorieEnum.Sport;
-                switch (categorie.PlaceholderText)
+                switch (categorie.SelectedItem.ToString())
                 {
                     case "Boek":
                         cat = CategorieEnum.Boek;
                         break;
-                    case "Muziek film":
+                    case "Muziek en film":
                         cat = CategorieEnum.Muziek_Film;
                         break;
                     case "Keuken":
@@ -75,35 +91,42 @@ namespace windowsWishlistAppGroepVM9
                 Item item = new Item(titel.Text, beschrijving.Text, cat);
                 wishlist.wishlist.addItem(item);
                 await app.repository.UpdateWishlist(wishlist.wishlist);
-                this.Frame.Navigate(typeof(Wishlist));
+                itms.Add(item);
             }
         }
 
         private async void Button_volger(object sender, RoutedEventArgs e)
         {
-            if (username.Text.Equals("") )
+            if (username.Text.Equals(""))
             {
                 message.Text = "Gebruikersnaam moet ingevuld worden";
                 message.Visibility = Visibility.Visible;
             }
             else
             {
-                await app.repository.CheckUsername(username.Text);
-                if (app.repository.results)
+                try
                 {
-                    wishlist.wishlist.Aanvragen.Add(username.Text);
-                    await app.repository.UpdateWishlist(wishlist.wishlist);
-                    this.Frame.Navigate(typeof(Wishlist));
-                }
-                else
+                    await app.repository.CheckUsername(username.Text, wishlist.wishlist.name);
+                }catch(Exception ex)
                 {
+                    message.Text = "Gebruiker niet gevonden";
                     message.Visibility = Visibility.Visible;
                 }
+                if (app.repository.results)
+                {
+                    wishlist.wishlist.Volgers.Add(username.Text);
+                    await app.repository.UpdateWishlist(wishlist.wishlist);
+                    vlgrs.Add(username.Text);
+                }
 
-               
+
+
             }
         }
-
-
+        private async void Button_terug(object sender, RoutedEventArgs e)
+        {
+            Homepage homepage = (Homepage) this.Parent;
+            homepage.SluitWishlist();
+        }
     }
 }

@@ -8,13 +8,13 @@ namespace windowsWishlistAppGroepVM9.Models
 {
 public class Item
 	{
-		private String Titel { get; set; }
-		private String Beschrijving { get; set; }
-		private String FotoUrl { get; set; }
-		private Gebruiker gebruiker { get; set; }
-		private CategorieEnum Categorie { get; set; }
+		public string Titel { get; set; }
+        public string Beschrijving { get; set; }
+        public string FotoUrl { get; set; }
+        public Gebruiker gebruiker { get; set; }
+        public CategorieEnum Categorie { get; set; }
 
-		public Item(String titel, String beschrijving, CategorieEnum cat)
+		public Item(string titel, string beschrijving, CategorieEnum cat)
 		{
 			Titel = titel;
 			Beschrijving = beschrijving;
