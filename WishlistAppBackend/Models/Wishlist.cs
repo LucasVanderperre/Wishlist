@@ -9,56 +9,62 @@ using System.Threading.Tasks;
 
 namespace windowsWishlistAppGroepVM9.Models
 {
-	public class Wishlist
-	{
-    //public String Id { get; set; }
-    public ObjectId Id { get; set; }
-    [BsonElement("Naam")]
-    public String Naam { get; set; }
-    [BsonElement("Datum")]
-    public DateTime Datum { get; set; }
-    [BsonElement("Items")]
-    public ICollection<Item> Items { get; set; }
-    [BsonElement("Volgers")]
-    public HashSet<Gebruiker> Volgers { get; }
-    [BsonElement("Aanvragen")]
-    public HashSet<Gebruiker> Aanvragen { get; }
+    public class Wishlist
+    {
+        //public String Id { get; set; }
+        public ObjectId Id { get; set; }
+        public string name
+        {
+            get { return Convert.ToString(Id); }
+            set { Id = MongoDB.Bson.ObjectId.Parse(value); }
+        }
+        [BsonElement("Naam")]
+        public String Naam { get; set; }
+        [BsonElement("Datum")]
+        public DateTime Datum { get; set; }
+        [BsonElement("Items")]
+        public ICollection<Item> Items { get; set; }
+        [BsonElement("Volgers")]
+        public HashSet<string> Volgers { get; }
+        [BsonElement("Aanvragen")]
+        public HashSet<string> Aanvragen { get; }
 
-		public Wishlist(String naam, DateTime datum)
-		{
-			Naam = naam;
-			Datum = datum;
-      this.Items = new List<Item>();
-      this.Volgers = new HashSet<Gebruiker>();
-      this.Aanvragen = new HashSet<Gebruiker>();
+        public Wishlist(String naam, DateTime datum)
+        {
+            Naam = naam;
+            Datum = datum;
+            this.Items = new List<Item>();
+            this.Volgers = new HashSet<string>();
+            this.Aanvragen = new HashSet<string>();
+        }
+
+        public void addItem(Item item)
+        {
+            Items.Add(item);
+        }
+
+        public void addVolger(Gebruiker gbr)
+        {
+            Volgers.Add(gbr.Username);
+        }
+
+        public void verwijderVolger(Gebruiker gbr)
+        {
+            Volgers.Remove(gbr.Username);
+        }
+
+        public void addAanvraag(Gebruiker gbr)
+        {
+            Aanvragen.Add(gbr.Username);
+        }
+
+        public void keurAanvraagGoed(Gebruiker gbr)
+        {
+            if (Aanvragen.Contains(gbr.Username))
+            {
+                Aanvragen.Remove(gbr.Username);
+                Volgers.Add(gbr.Username);
+            }
+        }
     }
-
-		public void addItem(Item item)
-		{
-			Items.Add(item);
-		}
-
-		public void addVolger(Gebruiker gbr)
-		{
-			Volgers.Add(gbr);
-		}
-
-		public void verwijderVolger(Gebruiker gbr)
-		{
-			Volgers.Remove(gbr);
-		}
-
-		public void addAanvraag(Gebruiker gbr)
-		{
-			Aanvragen.Add(gbr);
-		}
-
-		public void keurAanvraagGoed(Gebruiker gbr)
-		{
-			if (Aanvragen.Contains(gbr)){
-				Aanvragen.Remove(gbr);
-				Volgers.Add(gbr);
-			}
-		}
-	}
 }

@@ -43,9 +43,14 @@ namespace windowsWishlistAppGroepVM9
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri("http://localhost:57703/api/wishlist"));
             var lst = JsonConvert.DeserializeObject<List<Wishlist>>(json);
-            wishlists.ItemsSource = lst;
+            wishlists.ItemsSource = app.repository.gebruikerViewModel.Gebruiker.EigenWishlists;
             wishlists2.ItemsSource = lst;
             wishlists1.ItemsSource = lst;
+        }
+
+        private void AddWishlistbtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddWishlist));
         }
     }
 }

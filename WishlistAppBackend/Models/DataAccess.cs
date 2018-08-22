@@ -24,6 +24,9 @@ namespace WishlistAppBackend.Models
             _server = _client.GetServer();
 #pragma warning restore CS0618 // Type or member is obsolete
             _db = _server.GetDatabase("windowstaak");
+            var users = _db.GetCollection<Gebruiker>("Gebruikers");
+
+            users.CreateIndex(new IndexKeysBuilder().Ascending("Username"), IndexOptions.SetUnique(true));
         }
 
         public IEnumerable<Wishlist> GetWishlists()
@@ -59,6 +62,12 @@ namespace WishlistAppBackend.Models
         public IEnumerable<Gebruiker> GetGebruikers()
         {
             return _db.GetCollection<Gebruiker>("Gebruikers").FindAll();
+        }
+
+        public Gebruiker GetGebruiker(string username)
+        {
+            var res = Query<Gebruiker>.EQ(p => p.Username, username);
+            return _db.GetCollection<Gebruiker>("Gebruikers").FindOne(res);
         }
 
         public Gebruiker GetGebruiker(ObjectId id)

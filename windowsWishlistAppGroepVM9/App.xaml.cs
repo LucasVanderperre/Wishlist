@@ -25,6 +25,7 @@ namespace windowsWishlistAppGroepVM9
     sealed partial class App : Application
     {
         public RepositoryController repository { get; set; }
+        public Boolean backend = true;
        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -71,7 +72,7 @@ namespace windowsWishlistAppGroepVM9
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Login), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

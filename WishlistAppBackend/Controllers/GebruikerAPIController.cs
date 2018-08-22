@@ -26,10 +26,10 @@ namespace WishlistAppBackend.Controllers
       }
 
 
-      [HttpGet("{id:length(24)}")]
-      public IActionResult Get(string id)
+      [HttpGet("{Username}")]
+      public IActionResult Get(string Username)
       {
-        var Gebruiker = objds.GetGebruiker(new ObjectId(id));
+        var Gebruiker = objds.GetGebruiker(Username);
         if (Gebruiker == null)
         {
           return NotFound();

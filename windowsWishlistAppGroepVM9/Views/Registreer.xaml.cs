@@ -38,6 +38,12 @@ namespace windowsWishlistAppGroepVM9
 
     private async void Registreerbtn_OnClick(object sender, RoutedEventArgs e)
     {
+           
+            if(username.Text.Equals("")|| voornaam.Text.Equals("") || familienaam.Text.Equals("")|| wachtwoord1.Text.Equals(""))
+            {
+                message.Text = "Alle velden moeten worden ingevuld";
+                message.Visibility = Visibility.Visible;
+            }
             if (wachtwoord1.Text.Equals(wachtwoord2.Text))
             {
                 Gebruiker gbr = new Gebruiker(username.Text, wachtwoord1.Text, voornaam.Text, familienaam.Text);
@@ -47,6 +53,7 @@ namespace windowsWishlistAppGroepVM9
             }
             else
             {
+                message.Text = "Wachtwoorden moeten overeenkomen";
                 message.Visibility = Visibility.Visible;
 
             }

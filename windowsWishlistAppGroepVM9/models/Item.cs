@@ -14,10 +14,11 @@ public class Item
 		private Gebruiker gebruiker { get; set; }
 		private CategorieEnum Categorie { get; set; }
 
-		public Item(String titel, String beschrijving)
+		public Item(String titel, String beschrijving, CategorieEnum cat)
 		{
 			Titel = titel;
 			Beschrijving = beschrijving;
+            Categorie = cat;
 		}
 
 		public Boolean getGekocht()

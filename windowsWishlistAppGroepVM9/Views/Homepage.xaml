@@ -5,10 +5,15 @@
     xmlns:local="using:windowsWishlistAppGroepVM9"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
         <TextBlock Name="titel">Wishlists!</TextBlock>
+        <Button x:Name="AddWishlistbtn" Content="Wishlist toevoegen"  
+                        Height="35" Margin="10,0,0,0"  
+                        RelativePanel.RightOf="loginbtn" Click="AddWishlistbtn_OnClick"></Button>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -51,10 +56,10 @@
                                     <TextBlock Text="{Binding Datum}"/>
                                 </StackPanel>
                             <Button Margin="5">
-                                <Image Source="Assets/check.png" Width="20" Height="20"/>
+                                <Image Source="../Assets/check.png" Width="20" Height="20"/>
                             </Button>
                             <Button Margin="5">
-                                <Image Source="Assets/cancel.png" Width="20" Height="20"/>
+                                <Image Source="../Assets/cancel.png" Width="20" Height="20"/>
                             </Button>
                             </StackPanel>
                         

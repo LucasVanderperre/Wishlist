@@ -10,7 +10,13 @@ namespace windowsWishlistAppGroepVM9.Models
 {
     public class Gebruiker
     {
+        [BsonElement("_id")]
         public ObjectId Id { get; set; }
+        public string name
+        {
+            get { return Convert.ToString(Id); }
+            set { Id = MongoDB.Bson.ObjectId.Parse(value); }
+        }
         [BsonElement("Username")]
         public String Username { get; set; }
         [BsonElement("Voornaam")]
@@ -20,11 +26,11 @@ namespace windowsWishlistAppGroepVM9.Models
         [BsonElement("Wachtwoord")]
         public String Wachtwoord { get; set; }
         [BsonElement("EigenWishlists")]
-        public ICollection<Wishlist> EigenWishlists { get; set; }
+        public ICollection<string> EigenWishlists { get; set; }
         [BsonElement("AndereWishlists")]
-        public ICollection<Wishlist> AndereWishlists { get; set; }
+        public ICollection<string> AndereWishlists { get; set; }
         [BsonElement("Uitnodigingen")]
-        public ICollection<Wishlist> Uitnodigingen { get; set; }
+        public ICollection<string> Uitnodigingen { get; set; }
 
         public Gebruiker(String username, String wachtwoord, String voornaam, String familienaam)
         {
@@ -32,23 +38,23 @@ namespace windowsWishlistAppGroepVM9.Models
             this.Wachtwoord = wachtwoord;
             this.Voornaam = voornaam;
             this.Familienaam = familienaam;
-            this.EigenWishlists = new List<Wishlist>();
-            this.AndereWishlists = new List<Wishlist>();
-            this.Uitnodigingen = new List<Wishlist>();
+            this.EigenWishlists = new List<string>();
+            this.AndereWishlists = new List<string>();
+            this.Uitnodigingen = new List<string>();
         }
 
         public void addEigenWishlist(Wishlist wishlist)
         {
-            EigenWishlists.Add(wishlist);
+            EigenWishlists.Add(wishlist.name);
         }
         public void addAndereWishlist(Wishlist wishlist)
         {
-            AndereWishlists.Add(wishlist);
+            AndereWishlists.Add(wishlist.name);
         }
 
         public void addUitnodiging(Wishlist wishlist)
         {
-            Uitnodigingen.Add(wishlist);
+            Uitnodigingen.Add(wishlist.name);
         }
     }
 }
