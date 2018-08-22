@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="windowsWishlistAppGroepVM9.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:windowsWishlistAppGroepVM9"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.85*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="LightBlue">
+            <TextBlock Name="txtLogin" Text="Login"  
+                       TextAlignment="Center" FontSize="30"
+                       FontWeight="ExtraBlack" Margin="0,0,0,0"></TextBlock>
+        </Border>
+        <StackPanel x:Name="stackone" Grid.Row="1">
+            <TextBox PlaceholderText="Gebruikersnaam" Name="username" Width="300"  
+                     Margin="0,25,0,0"></TextBox>
+            <TextBox PlaceholderText="Wachtwoord"   Name="wachtwoord"
+                     Width="300" Margin="0,10,0,0"></TextBox>
+            <RelativePanel HorizontalAlignment="Center"  
+                           Margin="0,10,0,0">
+                <Button x:Name="loginbtn" Content="Login"  
+                        Height="35" Width="65" Click="Loginbtn_OnClick"></Button>
+
+                <Button x:Name="registreerbtn" Content="Registreren"  
+                        Height="35" Margin="10,0,0,0"  
+                        RelativePanel.RightOf="loginbtn" Click="Registreerbtn_OnClick"></Button>
+            </RelativePanel>
+        </StackPanel>
+    </Grid>
+</Page>
