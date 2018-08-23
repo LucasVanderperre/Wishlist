@@ -16,11 +16,15 @@ namespace windowsWishlistAppGroepVM9.Controllers
         private readonly string baseUrl = "http://localhost:57703/api";
         public LoginViewModel gebruikerViewModel { get; set; }
         public HomescreenViewModel homescreenLists { get; set; }
+
+        public WishlistViewModel wishlistViewmodel { get; set; }
+
         public bool results = false;
         public RepositoryController()
         {
             gebruikerViewModel = new LoginViewModel();
             homescreenLists = new HomescreenViewModel();
+            wishlistViewmodel = new WishlistViewModel();
         }
         public async Task Login(Gebruiker gbr)
         {
@@ -210,5 +214,22 @@ namespace windowsWishlistAppGroepVM9.Controllers
 
         }
         
+
+        public async Task koopItem(Item item, Wishlist list)
+        {
+            int index = list.Items.ToList().IndexOf(item);
+            item.gebruiker = gebruikerViewModel.Gebruiker.username;
+            list.Items.ToList().RemoveAt(index);
+            list.Items.Add(item);
+
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(list);
+            var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var rst = await client.PutAsync(baseUrl + "/wishlist/" + list.name, stringContent);
+            rst.EnsureSuccessStatusCode();
+
+
+
+        }
     }
 }

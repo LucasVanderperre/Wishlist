@@ -31,7 +31,6 @@ namespace windowsWishlistAppGroepVM9
         ObservableCollection<Wishlist> eigenlist = new ObservableCollection<Wishlist>();
         ObservableCollection<Wishlist> volgenlist = new ObservableCollection<Wishlist>();
         ObservableCollection<Wishlist> aanvragenlist = new ObservableCollection<Wishlist>();
-        Homepage content;
         public Homepage()
         {
             this.InitializeComponent();
@@ -66,14 +65,27 @@ namespace windowsWishlistAppGroepVM9
         }
         private void ListItem_Clicked(object sender, ItemClickEventArgs e)
         {
-            
+            /*
             WishlistViewModel vm = new WishlistViewModel();
             vm.wishlist = (Wishlist)e.ClickedItem;
-            content = this;
            var view = new Wishlists(vm);
-           this.Content = view;
-          //  this.Frame.Navigate(typeof(Wishlists), vm);
+           this.Content = view;*/
+            //  this.Frame.Navigate(typeof(Wishlists), vm);
+            app.repository.wishlistViewmodel.wishlist = (Wishlist)e.ClickedItem;
+            this.Frame.Navigate(typeof(Wishlists));
 
+        }
+
+        private void ListItemAndere_Clicked(object sender, ItemClickEventArgs e)
+        {
+            /*
+            WishlistViewModel vm = new WishlistViewModel();
+            vm.wishlist = (Wishlist)e.ClickedItem;
+            var view = new WishlistKopen(vm);
+            this.Content = view;*/
+            //  this.Frame.Navigate(typeof(Wishlists), vm);
+            app.repository.wishlistViewmodel.wishlist = (Wishlist)e.ClickedItem;
+            this.Frame.Navigate(typeof(WishlistKopen));
         }
 
         private void AddWishlistbtn_OnClick(object sender, RoutedEventArgs e)
@@ -105,12 +117,20 @@ namespace windowsWishlistAppGroepVM9
 
 
         }
-
+        /*
         public void SluitWishlist()
         {
             Homepage hp = new Homepage();
             hp.ophalen();
             this.Content = hp;
+        }
+        */
+        public void Button_loguit(object sender, RoutedEventArgs e)
+        {
+            app.repository.gebruikerViewModel = new LoginViewModel();
+            // Login li = new Login();
+            //this.Content = li;
+            this.Frame.Navigate(typeof(Login));
         }
     }
 }

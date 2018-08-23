@@ -48,11 +48,11 @@ namespace windowsWishlistAppGroepVM9
         }
 
 
-        private async void Button_Close(object sender, RoutedEventArgs e)
+        private void Button_Close(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = (Homepage)this.Parent;
-            homepage.SluitWishlist();
-
+            // Homepage homepage = (Homepage)this.Parent;
+            // homepage.SluitWishlist();
+            this.Frame.Navigate(typeof(Homepage));
         }
     }
 }

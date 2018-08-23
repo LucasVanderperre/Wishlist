@@ -10,5 +10,12 @@ namespace windowsWishlistAppGroepVM9.ViewModels
     public class WishlistViewModel
     {
         public Wishlist wishlist { get; set; }
+
+        public WishlistViewModel()
+        {
+            wishlist = new Wishlist();
+        }
     }
+
+   
 }

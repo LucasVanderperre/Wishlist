@@ -36,7 +36,7 @@ namespace windowsWishlistAppGroepVM9.Models
 
         }
 
-        public Wishlist(String naam, DateTime datum)
+        public Wishlist(string naam, DateTime datum)
         {
             Items = new List<Item>();
             Volgers = new List<string>();

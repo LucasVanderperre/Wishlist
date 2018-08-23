@@ -36,8 +36,9 @@ namespace windowsWishlistAppGroepVM9
             try
             {
             await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Text));
-            this.Frame.Navigate(typeof(Homepage));
-            }catch(Exception ex)
+                this.Frame.Navigate(typeof(Homepage));
+            }
+            catch(Exception ex)
             {
                 message.Visibility = Visibility.Visible;
             }
@@ -48,5 +49,7 @@ namespace windowsWishlistAppGroepVM9
         {
             this.Frame.Navigate(typeof(Registreer));
         }
+
+
     }
 }

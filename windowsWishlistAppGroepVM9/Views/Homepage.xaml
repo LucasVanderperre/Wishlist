@@ -37,7 +37,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="volgen" Grid.Column="1" Margin="10" Grid.Row="1">
+            <ListView x:Name="volgen" IsItemClickEnabled="True" ItemClick="ListItemAndere_Clicked" Grid.Column="1" Margin="10" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -67,7 +67,8 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <Button Margin="10" Width="100" Click="Button_loguit">Log uit</Button>
+
     </StackPanel>
-        
-    
+
 </Page>

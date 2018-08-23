@@ -18,7 +18,7 @@ namespace windowsWishlistAppGroepVM9.Models
 	  [BsonElement("FotoUrl")]
     public string FotoUrl { get; set; }
 	  [BsonElement("Gebruiker")]
-    public Gebruiker Gebruiker { get; set; }
+    public string Gebruiker { get; set; }
     public CategorieEnum Categorie { get; set; }
 
 		public Item(String titel, String beschrijving)

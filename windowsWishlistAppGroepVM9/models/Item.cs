@@ -11,7 +11,7 @@ public class Item
 		public string Titel { get; set; }
         public string Beschrijving { get; set; }
         public string FotoUrl { get; set; }
-        public Gebruiker gebruiker { get; set; }
+        public string gebruiker { get; set; }
         public CategorieEnum Categorie { get; set; }
 
 		public Item(string titel, string beschrijving, CategorieEnum cat)

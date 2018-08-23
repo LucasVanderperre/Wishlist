@@ -15,7 +15,7 @@
         <Border Grid.Row="0" Background="LightBlue">
             <TextBlock Name="txtLogin" Text="Login"  
                        TextAlignment="Center" FontSize="30"
-                       FontWeight="ExtraBlack" Margin="0,0,0,0"></TextBlock>
+                       FontWeight="ExtraBlack" Margin="0,0,0,10"></TextBlock>
         </Border>
         <StackPanel x:Name="stackone" Grid.Row="1">
             <TextBox PlaceholderText="Gebruikersnaam" Name="username" Width="300"  

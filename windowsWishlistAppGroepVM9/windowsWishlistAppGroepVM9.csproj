@@ -120,6 +120,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\WishlistKopen.xaml.cs">
+      <DependentUpon>WishlistKopen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Wishlists.xaml.cs">
       <DependentUpon>Wishlists.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WishlistKopen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Wishlists.xaml">
       <SubType>Designer</SubType>

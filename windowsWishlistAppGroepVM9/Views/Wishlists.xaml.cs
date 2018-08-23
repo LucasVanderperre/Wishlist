@@ -16,13 +16,9 @@ using Windows.UI.Xaml.Navigation;
 using windowsWishlistAppGroepVM9.Models;
 using windowsWishlistAppGroepVM9.ViewModels;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace windowsWishlistAppGroepVM9
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class Wishlists : Page
     {
         private WishlistViewModel wishlist;
@@ -30,11 +26,21 @@ namespace windowsWishlistAppGroepVM9
         ObservableCollection<Item> itms = new ObservableCollection<Item>();
         ObservableCollection<string> vlgrs = new ObservableCollection<string>();
 
-        public Wishlists(WishlistViewModel wl)
+        public Wishlists()
         {
             this.InitializeComponent();
-            this.wishlist = wl;
+            this.wishlist = new WishlistViewModel();
             app = (App)Application.Current;
+
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            //HttpClient client = new HttpClient();
+            //var json = await client.GetStringAsync(new Uri("http://localhost:14547/api/movies"));
+            //var lst = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(json);
+            this.wishlist = app.repository.wishlistViewmodel;
             messageItem.Visibility = Visibility.Collapsed;
             message.Visibility = Visibility.Collapsed;
 
@@ -48,16 +54,7 @@ namespace windowsWishlistAppGroepVM9
                 vlgrs.Add(aanvr);
             }
             volgers.ItemsSource = vlgrs;
-            titelView.Text = "Wishlist:  " + wl.wishlist.Naam;
-        }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            //HttpClient client = new HttpClient();
-            //var json = await client.GetStringAsync(new Uri("http://localhost:14547/api/movies"));
-            //var lst = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(json);
-
+            titelView.Text = "Wishlist:  " + app.repository.wishlistViewmodel.wishlist.Naam;
         }
 
         private async void Button_item(object sender, RoutedEventArgs e)
@@ -114,19 +111,30 @@ namespace windowsWishlistAppGroepVM9
                 }
                 if (app.repository.results)
                 {
-                    wishlist.wishlist.Volgers.Add(username.Text);
-                    await app.repository.UpdateWishlist(wishlist.wishlist);
-                    vlgrs.Add(username.Text);
+                    if (wishlist.wishlist.Volgers.Contains(username.Text))
+                    {
+                        message.Text = "Gebruiker is al toegevoegd";
+                        message.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        wishlist.wishlist.Volgers.Add(username.Text);
+                        await app.repository.UpdateWishlist(wishlist.wishlist);
+                        vlgrs.Add(username.Text);
+                    }
+                  
                 }
 
 
 
             }
         }
-        private async void Button_terug(object sender, RoutedEventArgs e)
+        private void Button_terug(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = (Homepage) this.Parent;
-            homepage.SluitWishlist();
+            // Homepage homepage = (Homepage) this.Parent;
+            // homepage.SluitWishlist();
+            app.repository.wishlistViewmodel = new WishlistViewModel();
+            this.Frame.Navigate(typeof(Homepage));
         }
     }
 }
