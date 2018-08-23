@@ -67,7 +67,7 @@ namespace windowsWishlistAppGroepVM9
             else
             {
                 CategorieEnum cat = CategorieEnum.Sport;
-                switch (categorie.SelectedItem.ToString())
+                switch (((ComboBoxItem)categorie.SelectedItem).Content)
                 {
                     case "Boek":
                         cat = CategorieEnum.Boek;
@@ -85,7 +85,7 @@ namespace windowsWishlistAppGroepVM9
                         Console.WriteLine("Categorie probleem");
                         break;
                 }
-                Item item = new Item(titel.Text, beschrijving.Text, cat);
+                Item item = new Item(titel.Text, beschrijving.Text, cat, null);
                 wishlist.wishlist.addItem(item);
                 await app.repository.UpdateWishlist(wishlist.wishlist);
                 itms.Add(item);
@@ -104,7 +104,8 @@ namespace windowsWishlistAppGroepVM9
                 try
                 {
                     await app.repository.CheckUsername(username.Text, wishlist.wishlist.name);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     message.Text = "Gebruiker niet gevonden";
                     message.Visibility = Visibility.Visible;
@@ -119,10 +120,11 @@ namespace windowsWishlistAppGroepVM9
                     else
                     {
                         wishlist.wishlist.Volgers.Add(username.Text);
+                        await app.repository.addUitnodiging(username.Text, wishlist.wishlist.name);
                         await app.repository.UpdateWishlist(wishlist.wishlist);
                         vlgrs.Add(username.Text);
                     }
-                  
+
                 }
 
 

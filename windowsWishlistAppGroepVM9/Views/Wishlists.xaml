@@ -6,14 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Name="titelView"  FontWeight="Black" FontSize="30" Text="Wishlist: " Margin="10"></TextBlock>
-        <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock Name="titelView"  FontWeight="Black" FontSize="30" Text="Wishlist: " Margin="10"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <StackPanel  Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <TextBlock FontWeight="Black" FontSize="25" Text="Items: " Margin="10 0 10 10"></TextBlock>
-
-
                     <ListView x:Name="items" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -57,35 +55,34 @@
 
                     </Grid>
                     <Button Margin="10" Width="100" Click="Button_item">Toevoegen</Button>
-                    <TextBox PlaceholderText="Alle velden moeten ingevuld worden" Foreground="Red" BorderThickness="0"  Name="messageItem"
-                     Width="300" Margin="0,10,0,0"></TextBox>
+                    <TextBlock Text="Alle velden moeten ingevuld worden." Foreground="Red" Name="messageItem"
+                     Width="300" Margin="0,10,0,0"></TextBlock>
 
 
                 </StackPanel>
-            </ScrollViewer>
-            <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <TextBlock FontWeight="Black" FontSize="25" Text="Volgers: " Margin="10 0 10 10"></TextBlock>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                    <ListView x:Name="volgers">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollViewer>
-                <TextBlock Text="Nieuwe volger toevoegen:"></TextBlock>
+                        <ListView x:Name="volgers">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                    <TextBlock Text="Nieuwe volger toevoegen:"></TextBlock>
                     <TextBlock Text="Gebruikersnaam:" Margin="10"></TextBlock>
                     <TextBox HorizontalAlignment="Left" Width="200" Name="username" Margin="10" ></TextBox>
                     <Button Margin="10" Width="100" Click="Button_volger">Toevoegen</Button>
-                    <TextBox PlaceholderText="Gebruiker bestaat niet"  BorderThickness="0"  Name="message"
-                     Width="300" Margin="0,10,0,0"></TextBox>
-
+                    <TextBlock Text="Gebruiker bestaat niet" Foreground="Red" Name="message"
+                     Width="300" Margin="0,10,0,0"></TextBlock>
                 </StackPanel>
+            </StackPanel>
+            <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
         </StackPanel>
-        <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
-    </StackPanel>
+    </ScrollViewer>
 </Page>

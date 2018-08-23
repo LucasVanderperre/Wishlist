@@ -9,24 +9,21 @@
     
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <TextBlock Name="titel">Wishlists!</TextBlock>
-        <Button x:Name="AddWishlistbtn" Content="Wishlist toevoegen"  
-                        Height="35" Margin="10,0,0,0"  
-                        RelativePanel.RightOf="loginbtn" Click="AddWishlistbtn_OnClick"></Button>
+    <StackPanel Margin="10">
+        <TextBlock FontSize="35" Name="titel" Margin="10">Wishlists!</TextBlock>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="10">Eigen wishlists</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="10">wishlists die je volgt</TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0" Margin="10">Aanvragen</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium">Eigen wishlists</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium">Wishlists die je volgt</TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium" >Aanvragen</TextBlock>
             <ListView x:Name="eigen" Grid.Column="0" Grid.Row="1" Margin="10" IsItemClickEnabled="True" ItemClick="ListItem_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -67,6 +64,8 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <Button Background="LightBlue" x:Name="AddWishlistbtn" Content="Wishlist toevoegen"  
+                        Height="35" Margin="10,10,0,10" Click="AddWishlistbtn_OnClick"></Button>
         <Button Margin="10" Width="100" Click="Button_loguit">Log uit</Button>
 
     </StackPanel>

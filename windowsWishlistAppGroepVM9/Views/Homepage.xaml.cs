@@ -35,7 +35,7 @@ namespace windowsWishlistAppGroepVM9
         {
             this.InitializeComponent();
             app = (App)Application.Current;
-            titel.Text = "Welkom " + app.repository.gebruikerViewModel.Gebruiker.voornaam + " "+
+            titel.Text = "Welkom " + app.repository.gebruikerViewModel.Gebruiker.voornaam + " " +
                 app.repository.gebruikerViewModel.Gebruiker.familienaam;
 
         }
@@ -90,46 +90,29 @@ namespace windowsWishlistAppGroepVM9
 
         private void AddWishlistbtn_OnClick(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(typeof(AddWishlist));
-            this.Content = new AddWishlist();
+            this.Frame.Navigate(typeof(AddWishlist));
+            //this.Content = new AddWishlist();
         }
 
         private async void Button_weiger(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            Wishlist wishlist = (Wishlist) btn.DataContext;
-          //  Wishlist wishlist = (Wishlist)e.ClickedItem;
-           await app.repository.weigerUitnodiging(wishlist);
+            Wishlist wishlist = (Wishlist)btn.DataContext;
+            await app.repository.weigerUitnodiging(wishlist);
             aanvragenlist.Remove(wishlist);
-
-           
         }
         private async void Button_accept(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             Wishlist wishlist = (Wishlist)btn.DataContext;
-            //    Wishlist wishlist = (Wishlist)e.ClickedItem;
-            //   await app.repository.weigerUitnodiging(wishlist);
-            //  aanvragenlist.Remove(wishlist);
             await app.repository.accepteerUitnodiging(wishlist);
             aanvragenlist.Remove(wishlist);
             volgenlist.Add(wishlist);
-
-
         }
-        /*
-        public void SluitWishlist()
-        {
-            Homepage hp = new Homepage();
-            hp.ophalen();
-            this.Content = hp;
-        }
-        */
+
         public void Button_loguit(object sender, RoutedEventArgs e)
         {
             app.repository.gebruikerViewModel = new LoginViewModel();
-            // Login li = new Login();
-            //this.Content = li;
             this.Frame.Navigate(typeof(Login));
         }
     }

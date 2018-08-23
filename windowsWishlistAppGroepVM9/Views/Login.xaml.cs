@@ -13,13 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace windowsWishlistAppGroepVM9
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Login : Page
     {
         private App app;
@@ -35,21 +30,18 @@ namespace windowsWishlistAppGroepVM9
         {
             try
             {
-            await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Text));
+            await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Password));
                 this.Frame.Navigate(typeof(Homepage));
             }
             catch(Exception ex)
             {
                 message.Visibility = Visibility.Visible;
             }
-
         }
 
         private void Registreerbtn_OnClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Registreer));
         }
-
-
     }
 }

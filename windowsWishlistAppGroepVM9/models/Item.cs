@@ -11,20 +11,20 @@ public class Item
 		public string Titel { get; set; }
         public string Beschrijving { get; set; }
         public string FotoUrl { get; set; }
-        public string gebruiker { get; set; }
+        public string Gebruiker { get; set; }
         public CategorieEnum Categorie { get; set; }
 
-		public Item(string titel, string beschrijving, CategorieEnum cat)
+		public Item(string titel, string beschrijving, CategorieEnum cat, string gebruiker)
 		{
 			Titel = titel;
 			Beschrijving = beschrijving;
             Categorie = cat;
+            Gebruiker = gebruiker;
 		}
 
-		public Boolean getGekocht()
+		public Boolean isGekocht()
 		{
-			if (gebruiker != null) { return true; }
-			return false;
+            return Gebruiker != null;
 		}
-	}
+    }
 }

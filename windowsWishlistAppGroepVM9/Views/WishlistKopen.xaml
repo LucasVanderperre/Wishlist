@@ -7,39 +7,41 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Name="titelView"  FontWeight="Black" FontSize="30" Text="Wishlist: " Margin="10"></TextBlock>
-        <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock FontWeight="Black" FontSize="25" Text="Items: " Margin="10 0 10 10"></TextBlock>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock Name="titelView"  FontSize="35" Text="Wishlist: " Margin="10"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <TextBlock FontWeight="Medium" FontSize="30" Text="Items: " Margin="10 0 10 10"></TextBlock>
                     <ListView x:Name="items">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Width="300">
+                                <StackPanel Orientation="Horizontal" Width="700">
                                     <StackPanel Width="250">
-                                        <TextBlock Text="{Binding Titel}"/>
-                                        <TextBlock FontSize="10" Text="{Binding Categorie}"/>
-                                        <TextBlock FontSize="10" Text="{Binding Beschrijving}"/>
+                                        <TextBlock FontSize="25" Text="{Binding Item.Titel}" Margin="5,0,5,0" FontWeight="Medium"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="15" Text="Categorie:" Margin="5,0,5,0" FontWeight="Medium"/>
+                                            <TextBlock FontSize="15" Text="{Binding Item.Categorie}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="15" Text="Beschrijving:" Margin="5,0,5,0" FontWeight="Medium"/>
+                                            <TextBlock FontSize="15" Text="{Binding Item.Beschrijving}"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <Button Click="Button_koop"  Margin="5">
-                                        <Image Source="../Assets/check.png" Width="20" Height="20"/>
-                                    </Button>
-                                    <!--<Button Click="Button_weiger" Margin="5">
-                                    <Image Source="../Assets/cancel.png" Width="20" Height="20"/>
-                                </Button>-->
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Foreground="Green"  FontSize="15" Text="Gekocht door" Margin="5,0,5,0"/>
+                                        <TextBlock Foreground="Green" FontSize="15" Text="{Binding Item.Gebruiker}"/>
+                                        <Button Click="Button_koop"  Margin="5" Visibility="{Binding isGekocht}">
+                                            <Image Source="../Assets/check.png" Width="20" Height="20"/>
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </ScrollViewer>
-
-
-                <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
+                    <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-    </StackPanel>
-
+    </ScrollViewer>
 </Page>

@@ -24,7 +24,7 @@ namespace windowsWishlistAppGroepVM9
         {
             this.InitializeComponent();
             app = (App)Application.Current;
-
+            message.Visibility = Visibility.Collapsed;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -34,10 +34,9 @@ namespace windowsWishlistAppGroepVM9
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (naam.Text.Equals(""))
+            if (naam.Text.Equals("") || datum.Date.DateTime < DateTime.Now)
             {
-                //  message.Text = "Naam moet ingevuld worden";
-                // message.Visibility = Visibility.Visible;
+                message.Visibility = Visibility.Visible;
             }
             else
             {

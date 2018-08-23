@@ -88,6 +88,20 @@ namespace windowsWishlistAppGroepVM9.Controllers
             }
         }
 
+        public async Task addUitnodiging(string username, string wishlist)
+        {
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(username);
+            var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var result = await client.GetStringAsync(baseUrl + "/gebruiker/" + username);
+            Gebruiker gebruiker = JsonConvert.DeserializeObject<Gebruiker>(result);
+            gebruiker.addUitnodiging(wishlist);
+            myContent = JsonConvert.SerializeObject(gebruiker);
+            stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+            var rst = await client.PutAsync(baseUrl + "/gebruiker/" + gebruiker.name, stringContent);
+            rst.EnsureSuccessStatusCode();
+        }
+
         public async Task UpdateWishlist(Wishlist wishlist)
         {
             HttpClient client = new HttpClient();
@@ -121,20 +135,12 @@ namespace windowsWishlistAppGroepVM9.Controllers
             {
                 Console.Write("User bestaat");
                 results = true;
-                wl.addUitnodiging(wishlist);
-                myContent = JsonConvert.SerializeObject(wl);
-                stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
-                var rst = await client.PutAsync(baseUrl + "/gebruiker/" + wl.name, stringContent);
-                rst.EnsureSuccessStatusCode();
-                string responseBody = await rst.Content.ReadAsStringAsync();
             }
             else
             {
                 Console.Write("User bestaat niet");
                 results = false;
             }
-           
-            
         }
         public async Task getWishlists()
         {
@@ -210,16 +216,13 @@ namespace windowsWishlistAppGroepVM9.Controllers
             var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
             var rst = await client.PutAsync(baseUrl + "/gebruiker/" + gebruikerViewModel.Gebruiker.name, stringContent);
             rst.EnsureSuccessStatusCode();
-
-
         }
         
-
         public async Task koopItem(Item item, Wishlist list)
         {
-            int index = list.Items.ToList().IndexOf(item);
-            item.gebruiker = gebruikerViewModel.Gebruiker.username;
-            list.Items.ToList().RemoveAt(index);
+            //int index = list.Items.ToList().IndexOf(item);
+            list.Items.Remove(item);
+            item.Gebruiker = gebruikerViewModel.Gebruiker.username;
             list.Items.Add(item);
 
             HttpClient client = new HttpClient();
@@ -227,9 +230,6 @@ namespace windowsWishlistAppGroepVM9.Controllers
             var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
             var rst = await client.PutAsync(baseUrl + "/wishlist/" + list.name, stringContent);
             rst.EnsureSuccessStatusCode();
-
-
-
         }
     }
 }

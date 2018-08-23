@@ -24,20 +24,23 @@
                      Margin="0,10,0,0"></TextBox>
             <TextBox PlaceholderText="Familienaam" Width="300" Name="familienaam" 
                      Margin="0,10,0,0"></TextBox>
-            <TextBox PlaceholderText="Wachtwoord" Name="wachtwoord1"  
-                     Width="300" Margin="0,10,0,0"></TextBox>
-            <TextBox PlaceholderText="Wachtwoord Herhalen"  Name="wachtwoord2"
-                     Width="300" Margin="0,10,0,0"></TextBox>
+            <PasswordBox PlaceholderText="Wachtwoord" Name="wachtwoord1" Width="300" Margin="0,10,0,0"
+             PasswordRevealMode="Peek"/>
+            <PasswordBox PlaceholderText="Wachtwoord Herhalen" Name="wachtwoord2" Width="300" Margin="0,10,0,0"
+             PasswordRevealMode="Peek"/>
             <TextBox PlaceholderText="Wachtwoorden komen niet overeen"  BorderThickness="0"  Name="message"
                      Width="300" Margin="0,10,0,0"></TextBox>
-            <RelativePanel HorizontalAlignment="Center"  
+            <StackPanel HorizontalAlignment="Center"  
                            Margin="0,10,0,0">
                 <Button x:Name="registreerbtn" Content="Registreer"  
-                        Height="35" Click="Registreerbtn_OnClick"></Button>
+                        Height="35" Click="Registreerbtn_OnClick" Width="150" Margin="0,0,0,20"></Button>
+
+                <Button x:Name="terugbtn" Content="Terug naar Login"  
+                        Height="35" Click="Terugbtn_OnClick" Width="150"></Button>
 
                 <!--<Button x:Name="loginbtn" Content="Login"  
                         Height="35" Margin="10,0,0,0"></Button>-->
-            </RelativePanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
     
