@@ -22,7 +22,7 @@ namespace windowsWishlistAppGroepVM9
         {
             this.InitializeComponent();
             this.wishlist = new WishlistViewModel();
-            app = (App)Application.Current;       
+            app = (App)Application.Current;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -44,6 +44,7 @@ namespace windowsWishlistAppGroepVM9
             await app.repository.koopItem(koop.Item, wishlist.wishlist);
             koop.Item.Gebruiker = app.repository.gebruikerViewModel.Gebruiker.username;
             koop.isGekocht = "Collapsed";
+            koop.isNietGekocht = "Visible";
             itms.Add(koop);
         }
 
@@ -58,14 +59,21 @@ namespace windowsWishlistAppGroepVM9
     {
         public string isGekocht { get; set; }
         public Item Item { get; set; }
+        public string isNietGekocht { get; set; }
 
         public CustomItem(Item item)
         {
             Item = item;
             if (item.Gebruiker != null)
+            {
                 isGekocht = "Collapsed";
+                isNietGekocht = "Visible";
+            }
             else
+            {
                 isGekocht = "Visible";
+                isNietGekocht = "Collapsed";
+            }
         }
     }
 }

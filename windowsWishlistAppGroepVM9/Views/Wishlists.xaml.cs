@@ -83,6 +83,9 @@ namespace windowsWishlistAppGroepVM9
                 wishlist.wishlist.addItem(item);
                 await app.repository.UpdateWishlist(wishlist.wishlist);
                 itms.Add(item);
+                titel.Text = "";
+                beschrijving.Text = "";
+
             }
         }
 

@@ -14,13 +14,13 @@
                 <TextBlock Name="titelView" FontSize="35" Text="Wishlist: " Margin="10" HorizontalAlignment="Center"/>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-                <StackPanel Width="400">
+                <StackPanel >
                     <TextBlock FontWeight="Medium" FontSize="30" Text="Items: " Margin="10 0 10 10"/>
                     <ListView x:Name="items">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Width="700">
-                                    <StackPanel Width="250">
+                                <StackPanel Orientation="Horizontal" >
+                                    <StackPanel Width="400">
                                         <TextBlock FontSize="25" Text="{Binding Item.Titel}" Margin="5,0,5,0" FontWeight="Medium"/>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock FontSize="15" Text="Categorie:" Margin="5,0,5,0" FontWeight="Medium"/>
@@ -32,7 +32,7 @@
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <TextBlock Foreground="Green"  FontSize="15" Text="Gekocht door" Margin="5,0,5,0"/>
+                                        <TextBlock Foreground="Green"  FontSize="15" Visibility="{Binding isNietGekocht}"  Text="Gekocht door" Margin="5,0,5,0"/>
                                         <TextBlock Foreground="Green" FontSize="15" Text="{Binding Item.Gebruiker}"/>
                                         <Button Click="Button_koop"  Margin="5" Visibility="{Binding isGekocht}">
                                             <Image Source="../Assets/check.png" Width="20" Height="20"/>
