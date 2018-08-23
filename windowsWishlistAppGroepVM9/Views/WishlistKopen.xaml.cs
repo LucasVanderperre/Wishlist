@@ -18,7 +18,6 @@ namespace windowsWishlistAppGroepVM9
         private App app;
         ObservableCollection<CustomItem> itms = new ObservableCollection<CustomItem>();
 
-
         public WishlistKopen()
         {
             this.InitializeComponent();
@@ -29,9 +28,6 @@ namespace windowsWishlistAppGroepVM9
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //HttpClient client = new HttpClient();
-            //var json = await client.GetStringAsync(new Uri("http://localhost:14547/api/movies"));
-            //var lst = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(json);
             this.wishlist = app.repository.wishlistViewmodel;
             foreach (Item item in wishlist.wishlist.Items)
             {
@@ -51,11 +47,8 @@ namespace windowsWishlistAppGroepVM9
             itms.Add(koop);
         }
 
-
         private void Button_terug(object sender, RoutedEventArgs e)
         {
-            //Homepage homepage = (Homepage)this.Parent;
-            //homepage.SluitWishlist();
             this.Frame.Navigate(typeof(Homepage));
         }
 
@@ -63,20 +56,12 @@ namespace windowsWishlistAppGroepVM9
 
     public class CustomItem
     {
-        //public string Titel { get; set; }
-        //public string Beschrijving { get; set; }
-        //public string Gebruiker { get; set; }
         public string isGekocht { get; set; }
         public Item Item { get; set; }
-       // public CategorieEnum Categorie { get; set; }
 
         public CustomItem(Item item)
         {
             Item = item;
-            //Titel = titel;
-            //Gebruiker = gebruiker;
-            //Beschrijving = beschrijving;
-            //Categorie = cat;
             if (item.Gebruiker != null)
                 isGekocht = "Collapsed";
             else

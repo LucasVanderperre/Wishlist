@@ -76,8 +76,6 @@ namespace WishlistAppBackend.Models
             return _db.GetCollection<Gebruiker>("Gebruikers").FindOne(res);
         }
 
-
-
         public void UpdateGebruiker(ObjectId id, Gebruiker p)
         {
             p.Id = id;

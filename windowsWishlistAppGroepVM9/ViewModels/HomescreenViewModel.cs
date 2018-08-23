@@ -17,10 +17,7 @@ namespace windowsWishlistAppGroepVM9.ViewModels
         {
             eigenWishlists = new List<Wishlist>();
             volgendeWishlists = new List<Wishlist>();
-
             aangevraagdeWishlists = new List<Wishlist>();
-
         }
-
     }
 }

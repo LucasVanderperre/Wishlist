@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace windowsWishlistAppGroepVM9.Models
 {
-public class Gebruiker
+    public class Gebruiker
     {
-
         public string name { get; set; }
-
         public string username { get; set; }
         public string voornaam { get; set; }
         public string familienaam { get; set; }
@@ -20,11 +18,11 @@ public class Gebruiker
         public ICollection<string> Uitnodigingen { get; set; }
         public string wachtwoord { get; set; }
 
-        public Gebruiker() {
+        public Gebruiker()
+        {
             EigenWishlists = new List<string>();
             AndereWishlists = new List<string>();
             Uitnodigingen = new List<string>();
-
         }
 
         public Gebruiker(string username, string wachtwoord)
@@ -36,7 +34,7 @@ public class Gebruiker
             Uitnodigingen = new List<string>();
         }
         public Gebruiker(string username, string wachtwoord, string voornaam, string familienaam)
-		{
+        {
             this.username = username;
             this.wachtwoord = wachtwoord;
             this.voornaam = voornaam;
@@ -46,18 +44,18 @@ public class Gebruiker
             Uitnodigingen = new List<string>();
         }
 
-		public void addEigenWishlist(string wishlist)
-		{
-			EigenWishlists.Add(wishlist);
-		}
-		public void addVolgendeWishlist(string wishlist)
-		{
+        public void addEigenWishlist(string wishlist)
+        {
+            EigenWishlists.Add(wishlist);
+        }
+        public void addVolgendeWishlist(string wishlist)
+        {
             AndereWishlists.Add(wishlist);
-		}
+        }
 
-		public void addUitnodiging(string wishlist)
-		{
-			Uitnodigingen.Add(wishlist);
-		}
-	}
+        public void addUitnodiging(string wishlist)
+        {
+            Uitnodigingen.Add(wishlist);
+        }
+    }
 }

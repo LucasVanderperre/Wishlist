@@ -13,8 +13,5 @@ namespace windowsWishlistAppGroepVM9.ViewModels
     public class LoginViewModel
     {
         public Gebruiker Gebruiker { get; set; }
-
-      
-
     }
 }

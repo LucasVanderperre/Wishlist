@@ -7,12 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock Name="titelView"  FontSize="35" Text="Wishlist: " Margin="10"></TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <TextBlock FontWeight="Medium" FontSize="30" Text="Items: " Margin="10 0 10 10"></TextBlock>
+        <StackPanel Orientation="Vertical">
+            <Border Background="LightBlue">
+                <TextBlock Name="titelView" FontSize="35" Text="Wishlist: " Margin="10" HorizontalAlignment="Center"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <StackPanel Width="400">
+                    <TextBlock FontWeight="Medium" FontSize="30" Text="Items: " Margin="10 0 10 10"/>
                     <ListView x:Name="items">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -39,7 +42,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
+                    <Button Margin="10" Width="100" Click="Button_terug" Content="Terug"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

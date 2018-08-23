@@ -6,68 +6,68 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Margin="10">
-        <TextBlock FontSize="35" Name="titel" Margin="10">Wishlists!</TextBlock>
+    <StackPanel>
+        <Border Background="LightBlue">
+            <TextBlock FontSize="35" Name="titel" Margin="10"  HorizontalAlignment="center">Wishlists!</TextBlock>
+        </Border>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium">Eigen wishlists</TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium">Wishlists die je volgt</TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium" >Aanvragen</TextBlock>
-            <ListView x:Name="eigen" Grid.Column="0" Grid.Row="1" Margin="10" IsItemClickEnabled="True" ItemClick="ListItem_Clicked">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel >
-                            <TextBlock Text="{Binding Naam}"/>
-                            <TextBlock Text="{Binding Datum}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="volgen" IsItemClickEnabled="True" ItemClick="ListItemAndere_Clicked" Grid.Column="1" Margin="10" Grid.Row="1">
+            <TextBlock HorizontalAlignment="center" Grid.Column="0" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium" TextDecorations="Underline">Eigen wishlists</TextBlock>
+            <TextBlock HorizontalAlignment="center" Grid.Column="1" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium" TextDecorations="Underline">Wishlists die je volgt</TextBlock>
+            <TextBlock HorizontalAlignment="center" Grid.Column="2" Grid.Row="0" Margin="10" FontSize="20" FontWeight="Medium" TextDecorations="Underline">Aanvragen</TextBlock>
+            <ListView HorizontalAlignment="center" x:Name="eigen" Grid.Column="0" Grid.Row="1" Margin="10 0 10 0" IsItemClickEnabled="True" ItemClick="ListItem_Clicked" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Naam}"/>
-                            <TextBlock Text="{Binding Datum}"/>
+                            <TextBlock Text="{Binding Naam}" FontSize="20" HorizontalAlignment="center" />
+                            <TextBlock Text="{Binding Datum}" Foreground="CadetBlue" HorizontalAlignment="center" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="aanvragen" Grid.Column="2" Margin="10" Grid.Row="1">
+            <ListView x:Name="volgen" IsItemClickEnabled="True" ItemClick="ListItemAndere_Clicked" Grid.Column="1" Margin="10 0 10 0" Grid.Row="1" HorizontalAlignment="center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <StackPanel>
+                                <TextBlock HorizontalAlignment="center" FontSize="20" Text="{Binding Naam}"/>
+                                <TextBlock HorizontalAlignment="center" Foreground="CadetBlue" Text="{Binding Datum}"/>
+                            </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="aanvragen" Grid.Column="2" Margin="10 0 10 0" Grid.Row="1" HorizontalAlignment="center">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Naam}"/>
-                                    <TextBlock Text="{Binding Datum}"/>
-                                </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Naam}" FontSize="20" HorizontalAlignment="center"/>
+                                <TextBlock Text="{Binding Datum}" Foreground="CadetBlue" HorizontalAlignment="center"/>
+                            </StackPanel>
                             <Button Click="Button_accept" Margin="5">
                                 <Image Source="../Assets/check.png" Width="20" Height="20"/>
                             </Button>
                             <Button Click="Button_weiger" Margin="5">
                                 <Image Source="../Assets/cancel.png" Width="20" Height="20"/>
                             </Button>
-                            </StackPanel>
-                        
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button x:Name="AddWishlistbtn" Content="Wishlist toevoegen"  
+                        Height="35" Margin="0,10,0,10" Click="AddWishlistbtn_OnClick" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center"/>
         </Grid>
-        <Button Background="LightBlue" x:Name="AddWishlistbtn" Content="Wishlist toevoegen"  
-                        Height="35" Margin="10,10,0,10" Click="AddWishlistbtn_OnClick"></Button>
-        <Button Margin="10" Width="100" Click="Button_loguit">Log uit</Button>
-
+        
+        <Button Margin="10" Width="100" Click="Button_loguit" Background="LightBlue" Content="Log uit" HorizontalAlignment="Center"/>
     </StackPanel>
-
 </Page>

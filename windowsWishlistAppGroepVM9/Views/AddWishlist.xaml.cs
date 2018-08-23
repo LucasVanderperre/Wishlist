@@ -16,7 +16,6 @@ using windowsWishlistAppGroepVM9.Models;
 
 namespace windowsWishlistAppGroepVM9
 {
-
     public sealed partial class AddWishlist : Page
     {
         private App app;
@@ -26,12 +25,10 @@ namespace windowsWishlistAppGroepVM9
             app = (App)Application.Current;
             message.Visibility = Visibility.Collapsed;
         }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (naam.Text.Equals("") || datum.Date.DateTime < DateTime.Now)
@@ -46,11 +43,8 @@ namespace windowsWishlistAppGroepVM9
             }
         }
 
-
         private void Button_Close(object sender, RoutedEventArgs e)
         {
-            // Homepage homepage = (Homepage)this.Parent;
-            // homepage.SluitWishlist();
             this.Frame.Navigate(typeof(Homepage));
         }
     }

@@ -13,8 +13,6 @@ namespace windowsWishlistAppGroepVM9.ViewModels
     public class ViewModelBase : INotifyPropertyChanged
     {
         private DataTemplate _template;
-
-
         public DataTemplate Template
         {
             get { return _template; }
@@ -31,7 +29,6 @@ namespace windowsWishlistAppGroepVM9.ViewModels
         public ViewModelBase()
         {
             Template = GetTemplate();
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

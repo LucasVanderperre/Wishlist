@@ -23,7 +23,7 @@ namespace windowsWishlistAppGroepVM9.Models
                 }
                 else
                 {
-                    Id = MongoDB.Bson.ObjectId.Parse(value);
+                    Id = ObjectId.Parse(value);
                 }
             }
         }

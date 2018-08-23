@@ -30,7 +30,7 @@ namespace windowsWishlistAppGroepVM9
         {
             try
             {
-            await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Password));
+                await app.repository.Login(new Models.Gebruiker(username.Text, wachtwoord.Password));
                 this.Frame.Navigate(typeof(Homepage));
             }
             catch(Exception ex)

@@ -15,7 +15,5 @@ namespace windowsWishlistAppGroepVM9.ViewModels
         {
             wishlist = new Wishlist();
         }
-    }
-
-   
+    } 
 }

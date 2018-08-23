@@ -11,7 +11,6 @@ namespace windowsWishlistAppGroepVM9.Models
 {
     public class Wishlist
     {
-        //public String Id { get; set; }
         [BsonElement("_id")]
         public ObjectId Id { get; set; }
         public string name
@@ -25,7 +24,7 @@ namespace windowsWishlistAppGroepVM9.Models
                 }
                 else
                 {
-                    Id = MongoDB.Bson.ObjectId.Parse(value);
+                    Id = ObjectId.Parse(value);
                 }
             }
         }

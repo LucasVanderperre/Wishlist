@@ -9,8 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Margin="10">
-        <TextBlock Margin="10" FontSize="35" Text="Maak een nieuwe Wishlist aan" Grid.Column="0" Grid.Row="0" ></TextBlock>
-        <Grid>
+        <Border Background="LightBlue">
+            <TextBlock Margin="10" FontSize="35" Text="Maak een nieuwe Wishlist aan" HorizontalAlignment="Center" />
+        </Border>
+        <Grid HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -29,10 +31,10 @@
             <TextBox Grid.Column="1"  Name="naam" Grid.Row="2" Margin="10" TextChanged="TextBox_TextChanged"></TextBox>
             <DatePicker Name="datum" Grid.Column="1" Grid.Row="3" Margin="10"></DatePicker>
         </Grid>
-        <TextBlock Name="message" Foreground="Red" Text="Naam mag niet leeg zijn en datum moet in de toekomst liggen."  Grid.Column="0" Grid.Row="3" Margin="10"></TextBlock>
-        <StackPanel Orientation="Horizontal" Margin="100,0,10,10">
-            <Button Margin="10" Width="100" Click="Button_Click">Aanmaken</Button>
-            <Button Margin="10" Width="100" Click="Button_Close">Terug</Button>
+        <TextBlock HorizontalAlignment="Center" Name="message" Foreground="Red" Text="Naam mag niet leeg zijn en datum moet in de toekomst liggen."  Grid.Column="0" Grid.Row="3" Margin="10"></TextBlock>
+        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Button Margin="10" Width="100" Click="Button_Click" Content="Aanmaken"/>
+            <Button Margin="10" Width="100" Click="Button_Close" Content="Terug"/>
         </StackPanel>
     </StackPanel>
 </Page>

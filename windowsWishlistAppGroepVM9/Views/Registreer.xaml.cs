@@ -25,7 +25,6 @@ namespace windowsWishlistAppGroepVM9
             this.InitializeComponent();
             message.Visibility = Visibility.Collapsed;
         }
-
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
@@ -35,7 +34,7 @@ namespace windowsWishlistAppGroepVM9
         {
             if (username.Text.Equals("") || voornaam.Text.Equals("") || familienaam.Text.Equals("") || wachtwoord1.Password.Equals(""))
             {
-                message.Text = "Alle velden moeten worden ingevuld";
+                message.Text = "Alle velden moeten worden ingevuld.";
                 message.Visibility = Visibility.Visible;
             }
             if (wachtwoord1.Password.Equals(wachtwoord2.Password))
@@ -46,7 +45,7 @@ namespace windowsWishlistAppGroepVM9
             }
             else
             {
-                message.Text = "Wachtwoorden moeten overeenkomen";
+                message.Text = "Wachtwoorden moeten overeenkomen.";
                 message.Visibility = Visibility.Visible;
             }
         }

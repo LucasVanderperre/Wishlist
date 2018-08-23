@@ -25,7 +25,6 @@ namespace WishlistAppBackend.Controllers
         return objds.GetGebruikers();
       }
 
-
       [HttpGet("{Username}")]
       public IActionResult Get(string Username)
       {
@@ -41,10 +40,8 @@ namespace WishlistAppBackend.Controllers
       public IActionResult Post([FromBody]Gebruiker p)
       {
         objds.RegistreerGebruiker(p);
-        //return new HttpOkObjectResult(p);
         return Ok(p);
       }
-
 
       [HttpPut("{id:length(24)}")]
       public IActionResult Put(string id, [FromBody]Gebruiker p)

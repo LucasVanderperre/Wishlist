@@ -18,13 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using windowsWishlistAppGroepVM9.Models;
 using windowsWishlistAppGroepVM9.ViewModels;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace windowsWishlistAppGroepVM9
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Homepage : Page
     {
         private App app;
@@ -37,7 +32,6 @@ namespace windowsWishlistAppGroepVM9
             app = (App)Application.Current;
             titel.Text = "Welkom " + app.repository.gebruikerViewModel.Gebruiker.voornaam + " " +
                 app.repository.gebruikerViewModel.Gebruiker.familienaam;
-
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -65,25 +59,12 @@ namespace windowsWishlistAppGroepVM9
         }
         private void ListItem_Clicked(object sender, ItemClickEventArgs e)
         {
-            /*
-            WishlistViewModel vm = new WishlistViewModel();
-            vm.wishlist = (Wishlist)e.ClickedItem;
-           var view = new Wishlists(vm);
-           this.Content = view;*/
-            //  this.Frame.Navigate(typeof(Wishlists), vm);
             app.repository.wishlistViewmodel.wishlist = (Wishlist)e.ClickedItem;
             this.Frame.Navigate(typeof(Wishlists));
-
         }
 
         private void ListItemAndere_Clicked(object sender, ItemClickEventArgs e)
         {
-            /*
-            WishlistViewModel vm = new WishlistViewModel();
-            vm.wishlist = (Wishlist)e.ClickedItem;
-            var view = new WishlistKopen(vm);
-            this.Content = view;*/
-            //  this.Frame.Navigate(typeof(Wishlists), vm);
             app.repository.wishlistViewmodel.wishlist = (Wishlist)e.ClickedItem;
             this.Frame.Navigate(typeof(WishlistKopen));
         }
@@ -91,7 +72,6 @@ namespace windowsWishlistAppGroepVM9
         private void AddWishlistbtn_OnClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AddWishlist));
-            //this.Content = new AddWishlist();
         }
 
         private async void Button_weiger(object sender, RoutedEventArgs e)

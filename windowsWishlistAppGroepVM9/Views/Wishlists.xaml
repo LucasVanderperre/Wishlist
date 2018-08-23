@@ -5,25 +5,35 @@
     xmlns:local="using:windowsWishlistAppGroepVM9"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock Name="titelView"  FontWeight="Black" FontSize="30" Text="Wishlist: " Margin="10"></TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="10" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <StackPanel  Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <TextBlock FontWeight="Black" FontSize="25" Text="Items: " Margin="10 0 10 10"></TextBlock>
-                    <ListView x:Name="items" >
+        <StackPanel Orientation="Vertical" >
+            <Border Background="LightBlue">
+                <TextBlock  Name="titelView" FontSize="35" Text="Wishlist: " Margin="10" HorizontalAlignment="Center"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <StackPanel Width="400" >
+                    <TextBlock FontWeight="Black" FontSize="25" Text="Items: " Margin="10 0 10 10"/>
+                    <ListView x:Name="items">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Titel}"/>
-                                    <TextBlock FontSize="10" Text="{Binding Categorie}"/>
-                                    <TextBlock FontSize="10" Text="{Binding Beschrijving}"/>
+                                    <TextBlock FontSize="25" Text="{Binding Titel}" Margin="5,0,5,0" FontWeight="Medium"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="15" Text="Categorie:" Margin="5,0,5,0" FontWeight="Medium"/>
+                                        <TextBlock FontSize="15" Text="{Binding Categorie}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="15" Text="Beschrijving:" Margin="5,0,5,0" FontWeight="Medium"/>
+                                        <TextBlock FontSize="15" Text="{Binding Beschrijving}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <TextBlock Text="Nieuwe item toevoegen:"></TextBlock>
+                    <TextBlock FontSize="25" HorizontalAlignment="Center" Text="Nieuwe item toevoegen:" Margin="0 20 0 0"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -36,53 +46,45 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <TextBlock Text="Titel" Grid.Column="0" Grid.Row="2" Margin="10"></TextBlock>
-                        <TextBlock Text="Categorie"  Grid.Column="0" Grid.Row="3" Margin="10"></TextBlock>
-                        <TextBlock Text="Beschrijving"  Grid.Column="0" Grid.Row="4" Margin="10"></TextBlock>
-
-
-                        <TextBox Grid.Column="1"  Name="titel" Grid.Row="2" Margin="10"></TextBox>
+                        <TextBlock Text="Titel" Grid.Column="0" Grid.Row="2" Margin="10"/>
+                        <TextBlock Text="Categorie"  Grid.Column="0" Grid.Row="3" Margin="10"/>
+                        <TextBlock Text="Beschrijving"  Grid.Column="0" Grid.Row="4" Margin="10"/>
+                        <TextBox Grid.Column="1"  Name="titel" Grid.Row="2" Margin="10"/>
                         <ComboBox Grid.Column="1"  Name="categorie" Grid.Row="3" Width="180" Margin="10">
                             <ComboBoxItem>Boek</ComboBoxItem>
                             <ComboBoxItem IsSelected="True">Muziek en film</ComboBoxItem>
                             <ComboBoxItem>Keuken</ComboBoxItem>
                             <ComboBoxItem>Sport</ComboBoxItem>
-
                         </ComboBox>
-                        <TextBox Grid.Column="1"  Name="beschrijving" Grid.Row="4" Margin="10" ></TextBox>
-
+                        <TextBox Grid.Column="1"  Name="beschrijving" Grid.Row="4" Margin="10"/>
+                        <Button HorizontalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="10" Width="100" Click="Button_item" Content="Toevoegen"/>
                     </Grid>
-                    <Button Margin="10" Width="100" Click="Button_item">Toevoegen</Button>
                     <TextBlock Text="Alle velden moeten ingevuld worden." Foreground="Red" Name="messageItem"
-                     Width="300" Margin="0,10,0,0"></TextBlock>
-
-
+                     Width="300" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Width="400" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <TextBlock FontWeight="Black" FontSize="25" Text="Volgers: " Margin="10 0 10 10"></TextBlock>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-
-                        <ListView x:Name="volgers">
+                <StackPanel Width="400" >
+                    <TextBlock FontWeight="Black" FontSize="25" Text="Volgers: " Margin="10 0 10 10"/>
+                    <ListView x:Name="volgers">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding}"/>
+                                    <TextBlock FontSize="25" FontWeight="Medium" Text="{Binding}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    </ScrollViewer>
-                    <TextBlock Text="Nieuwe volger toevoegen:"></TextBlock>
-                    <TextBlock Text="Gebruikersnaam:" Margin="10"></TextBlock>
-                    <TextBox HorizontalAlignment="Left" Width="200" Name="username" Margin="10" ></TextBox>
-                    <Button Margin="10" Width="100" Click="Button_volger">Toevoegen</Button>
+                    <TextBlock Text="Gebruikersnaam:" FontSize="20" Margin="10 10 10 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox HorizontalAlignment="Left" Width="200" Name="username" Margin="10"/>
+                        <Button Margin="10" Width="100" Click="Button_volger" Content="Toevoegen"/>
+                    </StackPanel>
                     <TextBlock Text="Gebruiker bestaat niet" Foreground="Red" Name="message"
-                     Width="300" Margin="0,10,0,0"></TextBlock>
+                     Width="300" Margin="0,10,0,0"/>
                 </StackPanel>
             </StackPanel>
-            <Button Margin="10" Width="100" Click="Button_terug">Terug</Button>
+            <Button HorizontalAlignment="Center" Margin="10" Width="100" Click="Button_terug" Content="Terug"/>
         </StackPanel>
     </ScrollViewer>
 </Page>

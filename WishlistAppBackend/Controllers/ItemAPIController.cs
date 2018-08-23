@@ -40,7 +40,6 @@ namespace ItemAppBackend.Controllers
     public IActionResult Post([FromBody]Item p)
     {
       objds.CreateItem(p);
-      //return new HttpOkObjectResult(p);
       return Ok(p);
     }
     [HttpPut("{id:length(24)}")]

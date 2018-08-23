@@ -18,7 +18,6 @@ using windowsWishlistAppGroepVM9.ViewModels;
 
 namespace windowsWishlistAppGroepVM9
 {
-
     public sealed partial class Wishlists : Page
     {
         private WishlistViewModel wishlist;
@@ -31,15 +30,11 @@ namespace windowsWishlistAppGroepVM9
             this.InitializeComponent();
             this.wishlist = new WishlistViewModel();
             app = (App)Application.Current;
-
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //HttpClient client = new HttpClient();
-            //var json = await client.GetStringAsync(new Uri("http://localhost:14547/api/movies"));
-            //var lst = JsonConvert.DeserializeObject<ObservableCollection<Movie>>(json);
             this.wishlist = app.repository.wishlistViewmodel;
             messageItem.Visibility = Visibility.Collapsed;
             message.Visibility = Visibility.Collapsed;
@@ -61,7 +56,6 @@ namespace windowsWishlistAppGroepVM9
         {
             if (titel.Text.Equals("") || beschrijving.Text.Equals(""))
             {
-                //  message.Text = "Naam moet ingevuld worden";
                 messageItem.Visibility = Visibility.Visible;
             }
             else
@@ -126,15 +120,10 @@ namespace windowsWishlistAppGroepVM9
                     }
 
                 }
-
-
-
             }
         }
         private void Button_terug(object sender, RoutedEventArgs e)
         {
-            // Homepage homepage = (Homepage) this.Parent;
-            // homepage.SluitWishlist();
             app.repository.wishlistViewmodel = new WishlistViewModel();
             this.Frame.Navigate(typeof(Homepage));
         }
